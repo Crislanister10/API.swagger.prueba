@@ -55,7 +55,7 @@ paths:
          content:
             application/json:
              schema: 
-              $ref: "#/components/schemas/personalList"
+              $ref: "#/components/schemas/personalListUp"
                   
       responses:
         '201':
@@ -63,7 +63,7 @@ paths:
           content:
             aplication/json:
              schema:
-                 $ref: "#/components/schemas/personalList"
+                 $ref: "#/components/schemas/personalListUp"
         '404':
           $ref: "#/components/responses/InternalServerError"  
   
@@ -81,7 +81,7 @@ paths:
         '201':
           description: Datos obtenidos correctamente
           content:
-            application/json:
+            aplication/json:
              schema:
                  $ref: "#/components/schemas/personalList"
         '404':
@@ -102,7 +102,7 @@ paths:
         '201':
           description: Datos obtenidos correctamente
           content:
-            application/json:
+            aplication/json:
              schema:
                 $ref: "#/components/schemas/personalTable"
         '404':
@@ -155,29 +155,55 @@ components:
           phone:
             type: number
             format: integer
+    personalListUp:
+      
+        type: object
+        properties:
+          prs_name:
+            type: string
+            description: Campo VARCHAR que representa un name
+          prs_type_persona:
+            type: string
+            enum: 
+             - persona1
+             - persona2
+          prs_email:
+            type: string
+            format: email
+          prs_company:
+            type: string
+            description: Campo VARCHAR que representa company
+          prs_role:
+            type: string
+            enum: 
+             - rol1
+             - rol2
+          prs_phone:
+            type: number
+            format: integer
     
     personalTable:
         type: object
          
         properties:
-          id:
+          prs_id:
             type: number
             format: integer
-          idnumber:
+          prs_idnumber:
             type: number
             format: integer
-          name:
+          prs_name:
             type: string
             description: Campo VARCHAR que representa un name
-          type_persona:
+          prs_type_persona:
             type: string
             enum: 
              - persona1
              - persona2
-          email:
+          prs_email:
             type: string
             format: email
-          company:
+          prs_company:
             type: string
             description: Campo VARCHAR que representa company
           prs_department:
@@ -185,12 +211,12 @@ components:
             enum: 
              - department1
              - department2
-          role:
+          prs_role:
             type: string
             enum: 
              - rol1
              - rol2
-          phone:
+          prs_phone:
             type: number
             format: integer
           prs_photo_url:
