@@ -35,8 +35,8 @@ paths:
         '201':
           description: Datos obtenidos correctamente
           content:
-            aplication/json:
-             schema:
+            application/json:
+              schema:
                  $ref: "#/components/schemas/personalList"
         '404':
           $ref: "#/components/responses/InternalServerError"  
@@ -81,7 +81,7 @@ paths:
         '201':
           description: Datos obtenidos correctamente
           content:
-            aplication/json:
+            application/json:
              schema:
                  $ref: "#/components/schemas/personalList"
         '404':
@@ -102,7 +102,7 @@ paths:
         '201':
           description: Datos obtenidos correctamente
           content:
-            aplication/json:
+            application/json:
              schema:
                 $ref: "#/components/schemas/personalTable"
         '404':
