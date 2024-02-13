@@ -1,0 +1,250 @@
+openapi: 3.0.0
+servers:
+  
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/CRISTIANBENITEZ/Lab01/1.0.0
+  - description: Api principal
+    url: https://f7t7rs4yrtdl4tmt5lunrwohjm.apigateway.us-ashburn-1.oci.customer-oci.com/cac-api-auth
+  - description: ruta de peticiones
+    url: /http://10.1.2.6:9080/
+info:
+  version: "1.0.0"
+  title: LAB02 oAuth 2.0
+  description: >-
+    Servicio de Prueba con **SWAGGER**
+tags::
+  - Persona
+ 
+paths:
+
+          
+  /personal/{id}:
+    get:
+      tags:
+        - Persona
+      summary: get persona
+      description: Podemos obtener los datos de una persona en especifico
+      security: 
+        - oAuth2ClientCredentials: [f7t7rs4yrtdl4tmt5lunrwohjm.apigateway.us-ashburn-1.oci.customer-oci.com/super_user]
+      
+      parameters: 
+         - $ref: "#/components/parameters/personaIdParams"  
+                  
+      responses:
+        '201':
+          description: Datos obtenidos correctamente
+          content:
+            aplication/json:
+             schema:
+                 $ref: "#/components/schemas/personalList"
+        '404':
+          $ref: "#/components/responses/InternalServerError"  
+    
+    put:
+      tags:
+        - Persona
+      summary: Update persona
+      security: 
+        - oAuth2ClientCredentials: [f7t7rs4yrtdl4tmt5lunrwohjm.apigateway.us-ashburn-1.oci.customer-oci.com/super_user]
+      description: Podemos actualizar los datos de una persona en especifico
+      parameters: 
+         - $ref: "#/components/parameters/personaIdParams"
+      requestBody:
+         required: true
+         content:
+            application/json:
+             schema: 
+              $ref: "#/components/schemas/personalList"
+                  
+      responses:
+        '201':
+          description: Datos actualizados correctamente
+          content:
+            aplication/json:
+             schema:
+                 $ref: "#/components/schemas/personalList"
+        '404':
+          $ref: "#/components/responses/InternalServerError"  
+  
+  /personal:
+    get:
+      tags:
+        - Persona
+      summary: get personas
+      description: Podemos obtener los datos de todas las personas registradas
+      security:
+        - oAuth2ClientCredentials: [f7t7rs4yrtdl4tmt5lunrwohjm.apigateway.us-ashburn-1.oci.customer-oci.com/super_user]
+      
+                  
+      responses:
+        '201':
+          description: Datos obtenidos correctamente
+          content:
+            aplication/json:
+             schema:
+                 $ref: "#/components/schemas/personalList"
+        '404':
+          $ref: "#/components/responses/InternalServerError"    
+                
+  /personaltable: 
+    
+    get:
+      tags:
+        - Persona
+      summary: Obtener personasTable
+      description: Permite obtener los datos de todas las personasTable registradas
+      security:
+        - oAuth2ClientCredentials: [f7t7rs4yrtdl4tmt5lunrwohjm.apigateway.us-ashburn-1.oci.customer-oci.com/super_user]
+      
+                  
+      responses:
+        '201':
+          description: Datos obtenidos correctamente
+          content:
+            aplication/json:
+             schema:
+                $ref: "#/components/schemas/personalTable"
+        '404':
+          $ref: "#/components/responses/InternalServerError"        
+      
+components:
+
+  parameters:
+      personaIdParams:
+          name: id
+          in: path
+          required: true
+          schema:
+            type: number
+            format: integer
+          example: 69
+     
+          
+  schemas: 
+    personalList:
+      type: array
+      items: 
+        type: object
+        properties:
+          id:
+            type: number
+            format: integer
+          idnumber:
+            type: number
+            format: integer
+          name:
+            type: string
+            description: Campo VARCHAR que representa un name
+          type_persona:
+            type: string
+            enum: 
+             - persona1
+             - persona2
+          email:
+            type: string
+            format: email
+          company:
+            type: string
+            description: Campo VARCHAR que representa company
+          role:
+            type: string
+            enum: 
+             - rol1
+             - rol2
+          phone:
+            type: number
+            format: integer
+    
+    personalTable:
+        type: object
+         
+        properties:
+          id:
+            type: number
+            format: integer
+          idnumber:
+            type: number
+            format: integer
+          name:
+            type: string
+            description: Campo VARCHAR que representa un name
+          type_persona:
+            type: string
+            enum: 
+             - persona1
+             - persona2
+          email:
+            type: string
+            format: email
+          company:
+            type: string
+            description: Campo VARCHAR que representa company
+          prs_department:
+            type: string
+            enum: 
+             - department1
+             - department2
+          role:
+            type: string
+            enum: 
+             - rol1
+             - rol2
+          phone:
+            type: number
+            format: integer
+          prs_photo_url:
+            type: string 
+            format: uri
+            description: URL de la imagen del la persona
+          
+          assistances:
+            type: array
+            items:
+              type: object
+              properties:
+                ast_id:
+                  type: number
+                  format: integer
+                prs_idnumber:
+                    type: number
+                    format: integer
+                ast_date:
+                    type: string
+                    format: date
+                ast_check_in:
+                    type: string
+                    format: time
+                    description: Hora del día en formato HH:mm:ss
+                ast_check_out:
+                    type: string
+                    format: time
+                    description: Hora del día en formato HH:mm:ss
+                ast_created_at:
+                    type: string
+                    format: date
+                ast_updated_at:
+                    type: string
+                    format: date
+                    
+                    
+  securitySchemes:
+     oAuth2ClientCredentials:
+      type: oauth2
+      description: Este API utiliza OAuth 2 con el flujo de concesión de credenciales de cliente.
+      flows:
+        clientCredentials:
+          tokenUrl: https://idcs-f23adce9edfa453888c438104783e1be.identity.oraclecloud.com:443/oauth2/v1/token
+          scopes:
+            f7t7rs4yrtdl4tmt5lunrwohjm.apigateway.us-ashburn-1.oci.customer-oci.com/super_user: Read persona information
+            users-write: Write persona information
+                  
+            
+            
+  responses:
+    InternalServersuccefull:
+      description: 
+        Datos obtenidos correctamente
+    InternalServerError:
+      description: 
+        Ocurrio un error mientras se procesaba la respuesta.
