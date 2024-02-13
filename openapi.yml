@@ -1,12 +1,12 @@
 openapi: 3.0.0
 servers:
-  # Added by API Auto Mocking Plugin
+  
   # Added by API Auto Mocking Plugin
   - description: SwaggerHub API Auto Mocking
     url: https://virtserver.swaggerhub.com/CRISTIANBENITEZ/Lab01/1.0.0
-  - description: SwaggerHub API Auto Mocking
+  - description: Api principal
     url: https://f7t7rs4yrtdl4tmt5lunrwohjm.apigateway.us-ashburn-1.oci.customer-oci.com/cac-api-auth
-  - description: SwaggerHub API Auto Mocking
+  - description: ruta de peticiones
     url: /http://10.1.2.6:9080/
 info:
   version: "1.0.0"
