@@ -2,17 +2,12 @@ openapi: 3.0.0
 servers:
   # Added by API Auto Mocking Plugin
   # Added by API Auto Mocking Plugin
-  # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/CRISTIANBENITEZ/EasyShop/1.0
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/CRISTIANBENITEZ/Lab01/1.0.0
-  - description: SwaggerHub API Auto Mocking
+  
     url: https://f7t7rs4yrtdl4tmt5lunrwohjm.apigateway.us-ashburn-1.oci.customer-oci.com/cac-api-auth
   - description: SwaggerHub API Auto Mocking
     url: /http://10.1.2.6:9080/
 info:
-  version: '1.0'
+  version: "1.0.0"
   title: LAB02 oAuth 2.0
   description: >-
     Servicio de Prueba con **SWAGGER**
