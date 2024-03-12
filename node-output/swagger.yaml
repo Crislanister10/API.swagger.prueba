@@ -1,0 +1,627 @@
+openapi: 3.0.3
+info:
+  title: API  Valores y fiducia  (Gestión Integral)
+  description: >-  
+    
+    <img src="https://chat.google.com/u/0/api/get_attachment_url?url_type=FIFE_URL&content_type=image%2Fpng&attachment_token=AOo0EEWv4dn%2Be0A08Gdf8jRGdvlES06fya7ctLXmyk2%2BGZvEcuXnQhyTsrwaeLyItnGw391033EKyu1eilCwnBPYv0e2iUkRvLFTTlDUUKO6cuxBRJUx%2F3mqQZLtAPq26gn1Q%2B3hJFerEj6KgyYhtav%2FnTnphgaZ4f8gbDgNaUCU0ucU8NQLBUxbCYRLcYfliEEMj%2BTL95zlBHSI5BOILZoZtoScXxsTTCrsVdwVZJUqgxoLSiYM3mb%2FNiGEBbZub0u2Q1M2ZncmvzigJvpubCiX1%2B8gb4jJ3spi1rbGSbVsxA7EHxNvX2FomrJaXtx3K4eRLtFzyLzGQN1Wec4B5Ln1DlT59wE9ArBpfdOndwTWvn5hC96ZLg208llZTOJAglZxrkOOulKGDbJ8vE%2FovdduRw9qgir69HLcmNvDT0ey1pMGrnMetHEtAf0J4TsdP42FS9cTBF1dHl3tJaXF%2FiDXcYoW2AdM7Ku51IN45rv6xj9rqNiyflb6M8m7GqNfrzutPGw%2FrI1UZuxlLH2uSaY8QEyDezY3r3B3qOFbyxUZF5KQPm8Z1j2B9agpzxf7zfpSgqfiu%2B0nxikt7bz8BWNL5dJHo2KKTw%3D%3D&sz=w1366-h702" width=99%>
+  
+  
+    #### Esta API ofrece un conjunto completo de servicios de  ***inversión y fiducia*** para clientes de la entidad. Desde inversiones en fondos, hasta inversiones en el exterior, esta plataforma proporciona una solución integral para todas las necesidades financieras, con endpoints dedicados a la gestión de: 
+      
+     
+    
+     ## [Inversiones](#seccion1)
+     **Inversiones** 
+     
+     ##### Este servicio permite a los clientes realizar inversiones financieras, en diferentes fondos y hasta en el exterior, con el fin de obtener un retorno financiero.
+     
+     
+     
+     
+    **Vinculaciones** 
+      
+    #####  Este servicio permite la relación entre el cliente y la entidad financiera, donde el cliente puede tener varios productos financieros y servicios.
+    
+    **Recaudos** 
+      
+    ##### Gestión y seguimiento de los pagos recibidos por la entidad financiera, ya sea en forma de depósitos, transferencias o cualquier otro medio de entrada de fondos.
+    
+    **Facturaciones**
+    
+    
+    ##### Este servicio implica la emisión y gestión de facturas, ya sea para clientes individuales o corporativos.
+    
+    **Pagos**
+      
+    ##### Los pagos abarcan todas las transacciones financieras que implican la transferencia de fondos desde una cuenta a otra, ya sea dentro de la misma entidad financiera o hacia cuentas externas.
+    
+    **Documentación** 
+    
+    
+    ##### Permite el manejo y gestión de la documentación relacionada con las transacciones financieras, contratos, acuerdos, registros de clientes, entre otros.
+    
+    **Riesgos**
+      
+    ##### Este servicio se centra en la evaluación, gestión y mitigación de los riesgos financieros asociados a las operaciones de la entidad.
+    
+    ___
+    
+    
+    #### Los usuarios pueden acceder y administrar fácilmente sus cuentas y transacciones. Con esta API, la entidad financiera proporciona una experiencia fluida y eficiente para sus clientes, permitiéndoles aprovechar al máximo los servicios ofrecidos.
+    
+    
+   
+  
+  version: 3.0oas3.0.3
+servers:
+  - url: https://f7t7rs4yrtdl4tmt5lunrwohjm.apigateway.us-ashburn-1.oci.customer-oci.com/cac-api-auth
+    description: Api principal
+  - url: http://10.1.2.6:9080/
+    description: Ruta de peticiones 
+ 
+paths:
+  /personal/{id}:
+    get:
+      tags:
+        - Persona
+      description: Podemos obtener los datos de una persona en especifico
+      summary: get persona
+      operationId: getpersonaById
+      security:
+        - oAuth2ClientCredentials:
+            - >-
+              f7t7rs4yrtdl4tmt5lunrwohjm.apigateway.us-ashburn-1.oci.customer-oci.com/super_user
+      parameters:
+        - $ref: '#/components/parameters/personaIdParams'
+      responses:
+        '201':
+          description: Datos obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/personalList'
+        '404':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      tags:
+        - Persona
+      description: >- 
+      
+        ## Podemos actualizar los datos de una persona en especifico
+      summary: Update persona
+      operationId: updatePersona
+      security:
+        - oAuth2ClientCredentials:
+            - >-
+              f7t7rs4yrtdl4tmt5lunrwohjm.apigateway.us-ashburn-1.oci.customer-oci.com/super_user
+      
+      parameters:
+        - $ref: '#/components/parameters/personaIdParams'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/personalListUp'
+      responses:
+        '201':
+          description: Datos actualizados correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/personalListUp'
+        '404':
+          $ref: '#/components/responses/InternalServerError'
+  /personal:
+    get:
+      tags:
+        - Persona
+      summary: get personas
+      description: Podemos obtener los datos de todas las personas registradas
+      security:
+        - oAuth2ClientCredentials:
+            - >-
+              f7t7rs4yrtdl4tmt5lunrwohjm.apigateway.us-ashburn-1.oci.customer-oci.com/super_user
+      responses:
+        '201':
+          description: Datos obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/personalList'
+        '404':
+          $ref: '#/components/responses/InternalServerError'
+  /personaltable:
+    get:
+      tags:
+        - Persona
+      summary: Obtener personasTable
+      description: Permite obtener los datos de todas las personasTable registradas
+      security:
+        - oAuth2ClientCredentials:
+            - >-
+              f7t7rs4yrtdl4tmt5lunrwohjm.apigateway.us-ashburn-1.oci.customer-oci.com/super_user
+      responses:
+        '201':
+          description: Datos obtenidos correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/personalTable'
+        '404':
+          $ref: '#/components/responses/InternalServerError'
+          
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /api/b2b/cores/clientesoyd/v1.0/clientes:
+    get:
+      tags:
+        - CORES
+      description: >-
+          
+      security:
+        - oAuth2ClientCredentials: 
+          - scope1
+      responses:
+        "200":
+          description: Operación exitosa.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  estado:
+                    type: object
+                    properties:
+                      codigo:
+                        type: string
+                      descripcion:
+                        type: string
+                  
+                      
+        "400":
+          description: >-
+            Bad Request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not Found.
+        "500":
+          description: Internal Server Error.
+        "503":
+          description: Service Unavailable.
+  
+          
+  /api/b2b/recaudos/bbva/v1.0/registrar-pago:     
+    post:
+      tags:  
+        - PAGOS
+      description: "" #Descripción del servicio
+      security:
+        - oAuth2ClientCredentials: [] #Ejemplo de autorización necesaria. Referente al esquema en securitySchemes
+      requestBody: #Request body en caso de ser requerido.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EXP_VinculacionesRegistrarPago"
+      responses: #Respuestas retornadas por el servicio
+        "200":
+          description: Operación exitosa.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EXP_VinculacionesRegistrarPago" #Esquema que retorna el servicio, si retorna
+        "400":
+          description: Bad Request.
+        "401":
+          description: Unauthorized.
+        "403":
+          description: Forbidden.
+        "404":
+          description: Not Found.
+        "500":
+          description: Internal Server Error.
+        "503":
+          description: Service Unavailable.        
+components:
+  
+  schemas:
+    
+
+    EXP_VinculacionesRegistrarPago:
+      type: object
+      properties:
+        requestId:
+          type: integer
+          format: int64
+        status:
+          type: object
+          description: Objeto status
+          properties:
+            status:
+              type: string
+            reason:
+              type: integer
+              format: int64
+            message:
+              type: string
+            date:
+              type: string
+        
+        request: 
+          type: object
+          properties:
+            locale:
+              type: string
+            payer:
+              type: object
+              description: Objeto request
+              properties:
+                document:
+                  type: integer
+                  format: int64
+                documentType:
+                  type: string
+                name:
+                  type: string
+                surname:
+                  type: string
+                email:
+                  type: string
+                mobile:
+                  type: string
+                    
+              required: 
+              - locale
+              - payer
+              
+          
+            payment:
+              type: object
+              description: Objeto payment
+              properties:
+                reference:
+                  type: string
+                description:
+                  type: string
+                  
+                amount:
+                  type: object
+                  description: Objeto amount
+                  properties:
+                    taxes:
+                      type: object
+                      description: Objeto taxes
+                      properties:
+                        kind:
+                          type: string
+                        amount:
+                          type: number
+                          format: double
+                        base:
+                          type: number
+                          format: double
+                    currency:
+                      type: string
+                    total:
+                      type: number
+                      format: double
+                allowPartial:
+                  type: string
+                subscribe:
+                  type: string
+              required:
+                - amount
+                - subscribe
+            fields:
+              type: array
+              items:
+                  type: object
+                  properties:
+                    keyword:
+                      type: string
+                    value:
+                      type: string
+                    displayOn:
+                      type: string
+            returnUrl:
+              type: string
+            ipAddress:
+              type: string 
+            userAgent:
+              type: string 
+            expiration:
+              type: string 
+            captureAddress:
+              type: string 
+            skipResult:
+              type: string 
+            noBuyerFill:
+              type: string 
+            
+          required: 
+           - payment
+           - fields
+           - locale
+           - payer
+           
+        payment:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  reason:
+                    type: integer
+                    format: int64
+                  message:
+                    type: string
+                  date:
+                    type: string
+              internalReference:
+                type: integer
+                format: int64
+              paymentMethod:
+                type: string
+              paymentMethodName:
+                type: string
+              issuerName:
+                type: string
+              amount:
+                type: object
+                properties:
+                  from:
+                    type: object
+                    properties:
+                      currency:
+                        type: string
+                      total:
+                        type: number
+                        format: double
+                  to:
+                    type: object
+                    properties:
+                      currency:
+                        type: string
+                      total:
+                        type: number
+                        format: double
+                  factor:
+                        type: number
+                        format: double
+              authorization:
+                type: string
+              reference:
+                type: string
+              receipt:
+                type: integer
+                format: int64
+              franchise:
+                type: string
+              refunded:
+                type: string
+              discount:
+                type: object
+                properties:
+                  any_0:
+                    type: object
+                    properties:
+                      any_01:
+                        type: string
+              processorFields:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    keyword:
+                      type: string
+                    value:
+                      type: string
+                    displayOn:
+                      type: string
+                    
+                  
+            required: 
+             - status
+             
+      required:
+        - status
+        - request
+        - payment
+        
+        
+    personalList:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int32
+          idnumber:
+            type: integer
+            format: integer
+          name:
+            type: string
+            description: Campo VARCHAR que representa un name
+          type_persona:
+            type: string
+            enum:
+              - persona1
+              - persona2
+          email:
+            type: string
+            format: email
+          company:
+            type: string
+            description: Campo VARCHAR que representa company
+          role:
+            type: string
+            enum:
+              - rol1
+              - rol2
+          phone:
+            type: integer
+            format: int32
+    personalListUp:
+      type: object
+      properties:
+        prs_name:
+          type: string
+          description: Campo VARCHAR que representa un name
+        prs_type_persona:
+          type: string
+          enum:
+            - persona1
+            - persona2
+        prs_email:
+          type: string
+          format: email
+        prs_company:
+          type: string
+          description: Campo VARCHAR que representa company
+        prs_role:
+          type: string
+          enum:
+            - rol1
+            - rol2
+        prs_phone:
+          type: integer
+          format: int32
+    personalTable:
+      type: object
+      properties:
+        prs_id:
+          type: integer
+          format: int32
+        prs_idnumber:
+          type: integer
+          format: int32
+        prs_name:
+          type: string
+          description: Campo VARCHAR que representa un name
+        prs_type_persona:
+          type: string
+          enum:
+            - persona1
+            - persona2
+        prs_email:
+          type: string
+          format: email
+        prs_company:
+          type: string
+          description: Campo VARCHAR que representa company
+        prs_department:
+          type: string
+          enum:
+            - department1
+            - department2
+        prs_role:
+          type: string
+          enum:
+            - rol1
+            - rol2
+        prs_phone:
+          type: integer
+          format: int32
+        prs_photo_url:
+          type: string
+          format: uri
+          description: URL de la imagen del la persona
+        assistances:
+          type: array
+          items:
+            type: object
+            properties:
+              ast_id:
+                type: integer
+                format: int32
+              prs_idnumber:
+                type: integer
+                format: int32
+              ast_date:
+                type: string
+                format: date
+              ast_check_in:
+                type: string
+                format: time
+                description: Hora del dia en formato HH:mm:ss
+              ast_check_out:
+                type: string
+                format: time
+                description: Hora del dia en formato HH:mm:ss
+              ast_created_at:
+                type: string
+                format: date
+              ast_updated_at:
+                type: string
+                format: date
+  
+  
+    SoapEnvelope:
+      type: object
+      properties:
+        Envelope:
+          type: object
+          properties:
+            Header:
+              type: object
+            Body:
+              type: object
+              properties:
+                SoapRequest:
+                  type: object
+                  properties:
+                    Parametro1:
+                      type: string
+                    Parametro2:
+                      type: string
+  
+  
+  parameters:
+    personaIdParams:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: integer
+        format: int32
+      style: simple
+      example: 69
+      
+  responses:
+    InternalServersuccefull:
+      description: Datos obtenidos correctamente
+    InternalServerError:
+      description: Ocurrio un error mientras se procesaba la respuesta.
+  
+  securitySchemes:
+    oAuth2Credentials:
+      type: oauth2
+      description: >-
+        Este API utiliza OAuth 2 con el flujo de concesión de credenciales de
+        cliente.
+      flows:
+        clientCredentials:
+          tokenUrl: >-
+            https://idcs-f23adce9edfa453888c438104783e1be.identity.oraclecloud.com:443/oauth2/v1/token
+          scopes:
+            users-read: Read  information
+            users-write: Write  information
